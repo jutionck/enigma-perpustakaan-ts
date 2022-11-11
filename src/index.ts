@@ -24,9 +24,14 @@ book = {
 library.add(book);
 
 // GetAll
-const books: Book[] = library.getAll();
-console.log(books);
+console.log(library.getAll());
 
 // SearchByTitile
 const findBook01: Book[] = library.searchByTitle('TypeScript itu keren');
 console.log(findBook01);
+
+// Remove B002
+library.remove('B002');
+
+// Get All again
+console.log(library.getAll());
