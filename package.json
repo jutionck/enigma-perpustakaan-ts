@@ -10,5 +10,8 @@
   },
   "keywords": [],
   "author": "DAP Mandiri Angular",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "rxjs": "^7.5.7"
+  }
 }

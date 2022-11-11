@@ -1,3 +1,4 @@
+import { Observable, Observer } from 'rxjs';
 import Book from '../../model/book';
 import LibraryService from '../library.service';
 
@@ -7,49 +8,49 @@ class PgLibraryService implements LibraryService {
     this.books = [];
   }
 
-  add(book): Promise<string> {
+  add(book): Observable<string> {
     console.log('Proses penambahan data');
-    return new Promise<string>((resolve, reject) => {
+    return new Observable<string>((observer: Observer<string>) => {
       setTimeout(() => {
         this.books.push(book);
-        resolve('Proses penambahan data berhasil')
+        observer.next('Proses penambahan data berhasil')
       }, 1000);
     });
   }
 
-  getAll(): Promise<Book[]> {
+  getAll(): Observable<Book[]> {
     console.log('Proses pengambilan semua data');
-    return new Promise<Book[]>((resolve, reject) => {
+    return new Observable<Book[]>((observer: Observer<Book[]>) => {
       setTimeout(() => {
-        if (this.books.length > 0) return resolve(this.books);
-        return reject([]);
+        if (this.books.length > 0) return observer.next(this.books);
+        return observer.error([]);
       }, 1000);
     });
   }
 
-  searchByTitle(title: string): Promise<Book[]> {
+  searchByTitle(title: string): Observable<Book[]> {
     console.log('Proses pencarian data dengan judul: ' + title);
-    return new Promise<Book[]>((resolve, reject) => {
+    return new Observable<Book[]>((observer: Observer<Book[]>) => {
       setTimeout(() => {
         const books: Book[] = this.books.filter((book) => {
           if (book.title.toLocaleLowerCase() === title.toLocaleLowerCase()) return book;
         });
-        if (books.length > 0) return resolve(books);
-        return reject([]);
+        if (books.length > 0) return observer.next(books);
+        return observer.error([]);
       }, 1000);
     })
   }
 
-  remove(code: string): Promise<string> {
+  remove(code: string): Observable<string> {
     console.log('Proses penghapusan data dengan code: ' + code);
-    return new Promise<string>((resolve, reject) => {
+    return new Observable<string>((observer: Observer<string>) => {
       setTimeout(() => {
         if (this.books.length > 0) {
           let i = 0;
           for (let book of this.books) {
             if (book.code.toLowerCase() === code.toLowerCase()) {
               this.books.splice(i, 1);
-              return resolve(`Buku dengan code: ${code} berhasil di hapus`);
+              return observer.next(`Buku dengan code: ${code} berhasil di hapus`);
             }
             i++;
           }

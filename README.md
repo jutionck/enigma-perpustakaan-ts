@@ -1,5 +1,11 @@
 ## Enigma Perpustakaan
 
+## NPM Install
+
+```bash
+npm i rxjs
+```
+
 #### Run: Watch
 
 ```bash
