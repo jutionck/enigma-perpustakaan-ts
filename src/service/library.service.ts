@@ -1,4 +1,4 @@
-import Book from "../model/book";
+import Book from '../model/book';
 
 export default interface LibraryService {
   add(book: Book): void;
